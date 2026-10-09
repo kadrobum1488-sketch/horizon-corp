@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вакансия — Горизонт</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; animation: pageFade 0.5s ease-in; }
+  a { color: #e11; text-decoration: none; }
+  @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: rgba(0,0,0,0.85);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: #e11; color: #fff;
+    font-weight: 900; font-size: 26px;
+    clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+  }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-title { font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 2px; }
+  .logo-sub { font-size: 9px; color: #e11; letter-spacing: 2px; margin-top: 5px; font-weight: 700; }
+  nav ul { display: flex; gap: 30px; list-style: none; }
+  nav a { color: #e11; font-weight: 700; }
+
+  .vacancy-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 180px 60px 120px;
+  }
+
+  .vacancy-page .back {
+    display: inline-block;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #888;
+    transition: color 0.25s;
+  }
+  .vacancy-page .back:hover { color: #e11; }
+
+  .vacancy-page h1 {
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .vacancy-page .meta {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-size: 13px; color: #888;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #222;
+  }
+  .vacancy-page .meta span::before { content: '•  '; color: #e11; }
+
+  .vacancy-page h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 40px 0 18px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .vacancy-page p {
+    color: #ccc;
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .vacancy-page ul {
+    list-style: none;
+    padding: 0;
+  }
+  .vacancy-page ul li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .vacancy-page ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 8px; height: 8px;
+    background: #e11;
+    transform: rotate(45deg);
+  }
+
+  .apply-btn {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 16px 40px;
+    background: #e11;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    border: 2px solid #e11;
+  }
+  .apply-btn:hover {
+    background: transparent;
+    color: #e11;
+  }
+
+  footer {
+    display: flex; justify-content: space-between; padding: 30px 60px;
+    border-top: 1px solid #222; font-size: 13px; color: #888;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 15px 20px; }
+    nav ul { gap: 15px; font-size: 14px; flex-wrap: wrap; }
+    .vacancy-page { padding: 140px 20px 80px; }
+    .vacancy-page h1 { font-size: 28px; }
+    .vacancy-page .meta { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">G</div>
+    <div class="logo-text">
+      <span class="logo-title">ГОРИЗОНТ</span>
+      <span class="logo-sub">ЗАБОТА. ИННОВАЦИИ. БЕЗОПАСНОСТЬ.</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="index.html#about">О нас</a></li>
+    <li><a href="index.html#services">Услуги</a></li>
+    <li><a href="index.html#careers">Карьера</a></li>
+    <li><a href="careers.html">Вакансии</a></li>
+  </ul>
+</nav>
+
+<section class="vacancy-page">
+  <a href="careers.html" class="back">← Все вакансии</a>
+  <h1 id="title">Загрузка...</h1>
+  <div class="meta" id="meta"></div>
+  <div id="body"></div>
+  <a href="#" class="apply-btn">Отправить резюме</a>
+</section>
+
+<footer>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в роблоксе.</div>
+  <div><a href="index.html">← На главную</a></div>
+</footer>
+
+<script>
+  const vacancies = {
+    engineering: {
+      title: 'Начальник инженерно-технического управления',
+      meta: ['Объект: Институт Институт «Байкал»', 'Уровень допуска: 2', 'Полная занятость'],
+      description: 'Руководство инженерно-техническим управлением корпорации «Горизонт». Вы отвечаете за проектирование, модернизацию и бесперебойную работу инфраструктуры всех объектов корпорации по всему миру.',
+      duties: [
+        'Стратегическое планирование инженерной инфраструктуры корпорации',
+        'Контроль строительства и модернизации объектов высшего уровня секретности',
+        'Управление распределёнными командами инженеров и техников',
+        'Взаимодействие с научным и оборонным подразделениями корпорации'
+      ],
+      requirements: [
+        'Высшее техническое образование (МГТУ, МИФИ, МФТИ или аналог)',
+        '10+ лет опыта в управлении крупными инженерными проектами',
+        'Опыт работы на объектах повышенной секретности',
+        'Готовность к частым командировкам'
+      ]
+    },
+    baikal: {
+      title: 'Начальник службы безопасности Института «Байкал»',
+      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 4', 'Полная занятость'],
+      description: 'Институт «Байкал» — один из ключевых исследовательских объектов корпорации. Вам предстоит обеспечить безопасность института, его персонала и результатов научной работы.',
+      duties: [
+        'Организация охраны периметра и внутренних помещений',
+        'Контроль доступа в лаборатории высшего уровня секретности',
+        'Координация действий службы безопасности в нештатных ситуациях',
+        'Взаимодействие с оперативными подразделениями «Гранит»'
+      ],
+      requirements: [
+        'Опыт службы в силовых структурах не менее 8 лет',
+        'Опыт руководства охранными подразделениями на стратегических объектах',
+        'Знание современных систем безопасности и контроля доступа',
+        'Допуск к работе с секретными материалами'
+      ]
+    },
+    granit: {
+      title: 'Командир отряда специального реагирования «Гранит»',
+      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 4', 'Полная занятость'],
+      description: '«Гранит» — элитное подразделение корпорации, выполняющее задачи повышенной сложности по всему миру. Вам предстоит командовать оперативниками и отвечать за успех каждой миссии.',
+      duties: [
+        'Командование оперативными группами в зонах повышенного риска',
+        'Планирование и проведение спецопераций',
+        'Подготовка и обучение личного состава отряда',
+        'Взаимодействие с руководством корпорации и внешними структурами'
+      ],
+      requirements: [
+        'Опыт службы в спецподразделениях не менее 10 лет',
+        'Боевой опыт в горячих точках',
+        'Навыки тактического планирования',
+        'Готовность к работе в условиях повышенного стресса'
+      ]
+    },
+    medical: {
+      title: 'Начальник медицинского управления',
+      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 3', 'Полная занятость'],
+      description: 'Медицинское управление отвечает за здоровье сотрудников корпорации на всех объектах. От вашей работы зависит, насколько эффективно корпорация выполняет свои задачи.',
+      duties: [
+        'Руководство медицинскими центрами корпорации по всему миру',
+        'Разработка протоколов экстренной помощи',
+        'Контроль за здоровьем персонала, работающего в опасных условиях',
+        'Взаимодействие с научными подразделениями по вопросам аномальных воздействий'
+      ],
+      requirements: [
+        'Высшее медицинское образование, ординатура',
+        '10+ лет опыта в руководстве медицинскими учреждениями',
+        'Опыт работы в экстремальных условиях',
+        'Знание международных медицинских стандартов'
+      ]
+    },
+    internal: {
+      title: 'Начальник внутренней службы безопасности',
+      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 5', 'Полная занятость'],
+      description: 'Внутренняя безопасность корпорации — это защита от угроз изнутри. Вам предстоит работать с персоналом, проверять благонадёжность и предотвращать утечки информации.',
+      duties: [
+        'Проверка персонала при приёме на работу и в процессе деятельности',
+        'Расследование внутренних инцидентов',
+        'Предотвращение утечек секретной информации',
+        'Контроль соблюдения режима секретности'
+      ],
+      requirements: [
+        'Опыт работы в контрразведке или службах внутренней безопасности',
+        'Знание методов проверки и анализа данных',
+        'Опыт руководства подразделением не менее 5 лет',
+        'Абсолютная лояльность корпорации'
+      ]
+    }
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const vac = vacancies[id];
+
+  if (!vac) {
+    document.getElementById('title').textContent = 'Вакансия не найдена';
+    document.getElementById('body').innerHTML = '<p>К сожалению, такой вакансии у нас нет. Вернитесь на страницу <a href="careers.html" style="color:#e11">всех вакансий</a>.</p>';
+  } else {
+    document.title = vac.title + ' — Горизонт';
+    document.getElementById('title').textContent = vac.title;
+    document.getElementById('meta').innerHTML = vac.meta.map(m => `<span>${m}</span>`).join('');
+    document.getElementById('body').innerHTML = `
+      <h2>О должности</h2>
+      <p>${vac.description}</p>
+      <h2>Обязанности</h2>
+      <ul>${vac.duties.map(d => `<li>${d}</li>`).join('')}</ul>
+      <h2>Требования</h2>
+      <ul>${vac.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+    `;
+  }
+
+  // Плавный переход по ссылкам
+  document.querySelectorAll('a[href$=".html"], a[href*=".html?"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http')) return;
+      e.preventDefault();
+      document.body.style.transition = 'opacity 0.4s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = href; }, 400);
+    });
+  });
+</script>
+
+</body>
+</html>
