@@ -58,21 +58,51 @@
 /* ГЛАВНЫЙ ЭКРАН */
 .hero {
   height: 100vh;
-  background: url('hero.png') center/cover no-repeat;
   display: flex; align-items: center; justify-content: center;
   position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
 }
- .hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+
+/* Каждый кадр — отдельный слой с картинкой */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: heroFade 32s infinite;
 }
+
+.hero-slide:nth-child(1) { background-image: url('hero1.png'); animation-delay: 0s; }
+.hero-slide:nth-child(2) { background-image: url('hero2.png'); animation-delay: 8s; }
+.hero-slide:nth-child(3) { background-image: url('hero3.png'); animation-delay: 16s; }
+.hero-slide:nth-child(4) { background-image: url('hero4.png'); animation-delay: 24s; }
+
+/* Плавное появление и уход */
+@keyframes heroFade {
+  0%   { opacity: 0; }
+  4%   { opacity: 1; }
+  25%  { opacity: 1; }
+  29%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Затемнение поверх картинок, чтобы текст читался */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Заголовок поверх всего */
 .hero h1 {
-  position: relative; z-index: 1;
+  position: relative; z-index: 2;
   font-size: 48px; font-weight: 700;
   text-shadow: 0 2px 20px #000;
   text-align: center; padding: 0 20px;
 }
-
   /* СЕКЦИИ */
   section { padding: 100px 60px; }
   h2 { text-align: center; font-size: 40px; margin-bottom: 40px; }
@@ -144,6 +174,10 @@
 </nav>
 
 <section class="hero" id="home">
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
   <h1>Передовые технологии.</h1>
 </section>
 
