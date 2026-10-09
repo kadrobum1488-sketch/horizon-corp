@@ -8,8 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; }
-  a { color: #e11; text-decoration: none; }
+body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; animation: pageFade 0.5s ease-in; }
+@keyframes pageFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
   /* НАВИГАЦИЯ */
   nav {
