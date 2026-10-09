@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; }
   a { color: #e11; text-decoration: none; }
 
   /* НАВИГАЦИЯ */
@@ -62,6 +62,7 @@
   position: relative;
   overflow: hidden;
   background: #0a0a0a;
+ scroll-margin-top: 0;
 }
 
 /* Каждый кадр — отдельный слой с картинкой */
@@ -104,7 +105,7 @@
   text-align: center; padding: 0 20px;
 }
   /* СЕКЦИИ */
-  section { padding: 100px 60px; }
+section { padding: 100px 60px; scroll-margin-top: 80px; }
   h2 { text-align: center; font-size: 40px; margin-bottom: 40px; }
   .about p { max-width: 900px; margin: 0 auto; text-align: center; line-height: 1.6; }
 
