@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вакансии — Горизонт</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; }
+  a { color: #e11; text-decoration: none; }
+
+  /* НАВИГАЦИЯ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: rgba(0,0,0,0.85);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: #e11; color: #fff;
+    font-weight: 900; font-size: 26px;
+    clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+  }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-title { font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 2px; }
+  .logo-sub { font-size: 9px; color: #e11; letter-spacing: 2px; margin-top: 5px; font-weight: 700; }
+  nav ul { display: flex; gap: 30px; list-style: none; }
+  nav a { color: #e11; font-weight: 700; }
+
+  /* ЗАГОЛОВОК */
+  .page-head {
+    padding: 180px 60px 60px;
+    text-align: center;
+  }
+  .page-head h1 { font-size: 52px; font-weight: 900; letter-spacing: 2px; }
+  .page-head p {
+    margin-top: 20px; color: #aaa; font-size: 18px;
+    max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;
+  }
+
+  /* СПИСОК ВАКАНСИЙ */
+  .vacancies {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 60px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .vacancy {
+    display: block;
+    background: #111;
+    border: 1px solid #222;
+    border-left: 4px solid #333;
+    padding: 30px 40px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .vacancy:hover {
+    background: #1a0a0a;
+    border-color: #e11;
+    border-left-color: #e11;
+    transform: translateX(8px);
+    box-shadow: 0 0 0 1px #e11, 0 10px 30px rgba(238, 17, 17, 0.15);
+  }
+
+  .vacancy h3 {
+    font-size: 24px; font-weight: 700;
+    margin-bottom: 8px;
+    transition: color 0.25s ease;
+  }
+  .vacancy:hover h3 { color: #e11; }
+
+  .vacancy .meta {
+    display: flex; gap: 24px;
+    font-size: 13px; color: #888;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .vacancy .meta span::before { content: '•  '; color: #e11; }
+
+  .vacancy p { color: #bbb; line-height: 1.6; font-size: 15px; }
+
+  footer {
+    display: flex; justify-content: space-between; padding: 30px 60px;
+    border-top: 1px solid #222; font-size: 13px; color: #888;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 15px 20px; }
+    nav ul { gap: 15px; font-size: 14px; flex-wrap: wrap; }
+    .page-head { padding: 140px 20px 30px; }
+    .page-head h1 { font-size: 34px; }
+    .vacancies { padding: 20px 20px 80px; }
+    .vacancy { padding: 20px 22px; }
+    .vacancy .meta { flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">G</div>
+    <div class="logo-text">
+      <span class="logo-title">ГОРИЗОНТ</span>
+      <span class="logo-sub">ЗАБОТА. ИННОВАЦИИ. БЕЗОПАСНОСТЬ.</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="index.html#about">О нас</a></li>
+    <li><a href="index.html#services">Услуги</a></li>
+    <li><a href="index.html#careers">Карьера</a></li>
+    <li><a href="careers.html">Вакансии</a></li>
+  </ul>
+</nav>
+
+<section class="page-head">
+  <h1>ВАКАНТНЫЕ МЕСТА</h1>
+  <p>«Горизонт» ищет лидеров, готовых взять на себя ответственность за будущее корпорации. Ниже — открытые позиции руководящего состава.</p>
+</section>
+
+<section class="vacancies">
+
+  <a class="vacancy" href="#">
+    <h3>Директор по стратегической обороне</h3>
+    <div class="meta">
+      <span>Штаб-квартира: Силиконовая долина</span>
+      <span>Уровень допуска: GAMMA</span>
+      <span>Полная занятость</span>
+    </div>
+    <p>Руководство стратегическими подразделениями корпорации, планирование операций глобального масштаба, координация с правительственными структурами.</p>
+  </a>
+
+  <a class="vacancy" href="#">
+    <h3>Руководитель отдела аномальных исследований</h3>
+    <div class="meta">
+      <span>Объект «Ареал-7»</span>
+      <span>Уровень допуска: SIGMA</span>
+      <span>Полная занятость</span>
+    </div>
+    <p>Курирование исследований аномальных материалов, управление научными группами, контроль безопасности лабораторий высшего уровня.</p>
+  </a>
+
+  <a class="vacancy" href="#">
+    <h3>Начальник службы безопасности корпорации</h3>
+    <div class="meta">
+      <span>Мобильный офис</span>
+      <span>Уровень допуска: GAMMA</span>
+      <span>Полная занятость</span>
+    </div>
+    <p>Общее руководство службой безопасности, защита руководства и ключевых активов, взаимодействие с оперативными группами «Гранит».</p>
+  </a>
+
+  <a class="vacancy" href="#">
+    <h3>Директор по логистике и снабжению</h3>
+    <div class="meta">
+      <span>Региональный хаб: Франкфурт</span>
+      <span>Уровень допуска: BETA</span>
+      <span>Полная занятость</span>
+    </div>
+    <p>Организация глобальной логистики корпорации, управление поставками секретного оборудования и материалов между объектами.</p>
+  </a>
+
+  <a class="vacancy" href="#">
+    <h3>Глава департамента наблюдения и аналитики</h3>
+    <div class="meta">
+      <span>Технопарк «Око»</span>
+      <span>Уровень допуска: GAMMA</span>
+      <span>Полная занятость</span>
+    </div>
+    <p>Руководство системами глобального наблюдения, разработка стратегий прогнозирования угроз на основе ИИ-моделей корпорации.</p>
+  </a>
+
+  <a class="vacancy" href="#">
+    <h3>Финансовый директор Horizon Global</h3>
+    <div class="meta">
+      <span>Силиконовая долина</span>
+      <span>Уровень допуска: BETA</span>
+      <span>Полная занятость</span>
+    </div>
+    <p>Управление финансами глобальной корпорации, стратегическое планирование, работа с инвесторами и государственными контрактами.</p>
+  </a>
+
+</section>
+
+<footer>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Trepang2.</div>
+  <div><a href="index.html">← На главную</a></div>
+</footer>
+
+</body>
+</html>
