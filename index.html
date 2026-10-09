@@ -16,8 +16,41 @@
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 60px; background: rgba(0,0,0,0.85);
   }
-  .logo { font-weight: 900; font-size: 28px; color: #e11; letter-spacing: 2px; }
-  .logo small { display: block; font-size: 10px; color: #fff; letter-spacing: 4px; font-weight: 400; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #e11;
+  color: #fff;
+  font-weight: 900;
+  font-size: 26px;
+  clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.logo-title {
+  font-weight: 900;
+  font-size: 24px;
+  color: #fff;
+  letter-spacing: 2px;
+}
+.logo-sub {
+  font-size: 9px;
+  color: #e11;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  font-weight: 700;
+}
   nav ul { display: flex; gap: 30px; list-style: none; }
   nav a { color: #e11; font-weight: 700; }
 
@@ -94,7 +127,13 @@
 <body>
 
 <nav>
-  <div class="logo">ГОРИЗОНТ<small>БЕЗОПАСНОЕ ЗАВТРА</small></div>
+<div class="logo">
+  <div class="logo-mark">G</div>
+  <div class="logo-text">
+    <span class="logo-title">ГОРИЗОНТ</span>
+    <span class="logo-sub">ЗАБОТА. ИННОВАЦИИ. БЕЗОПАСНОСТЬ.</span>
+  </div>
+</div>
   <ul>
     <li><a href="#home">Главная</a></li>
     <li><a href="#about">О нас</a></li>
