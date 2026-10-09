@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Горизонт — Безопасное завтра</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; }
+  a { color: #e11; text-decoration: none; }
+
+  /* НАВИГАЦИЯ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: rgba(0,0,0,0.85);
+  }
+  .logo { font-weight: 900; font-size: 28px; color: #e11; letter-spacing: 2px; }
+  .logo small { display: block; font-size: 10px; color: #fff; letter-spacing: 4px; font-weight: 400; }
+  nav ul { display: flex; gap: 30px; list-style: none; }
+  nav a { color: #e11; font-weight: 700; }
+
+  /* ГЛАВНЫЙ ЭКРАН */
+  .hero {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920') center/cover;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero h1 { font-size: 48px; font-weight: 700; text-shadow: 0 2px 20px #000; text-align: center; padding: 0 20px; }
+
+  /* СЕКЦИИ */
+  section { padding: 100px 60px; }
+  h2 { text-align: center; font-size: 40px; margin-bottom: 40px; }
+  .about p { max-width: 900px; margin: 0 auto; text-align: center; line-height: 1.6; }
+
+  /* УСЛУГИ */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+  }
+  .service {
+    background-size: cover; background-position: center;
+    height: 260px; display: flex; align-items: center; justify-content: center;
+    position: relative; text-align: center;
+  }
+  .service::before {
+    content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+  }
+  .service h3 { position: relative; z-index: 1; font-size: 20px; padding: 0 10px; }
+  .service-desc { margin-top: 15px; font-size: 14px; line-height: 1.5; color: #ccc; }
+
+  /* КАРЬЕРА */
+  .career {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    margin-bottom: 60px; align-items: center;
+  }
+  .career-img {
+    height: 300px; background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .career-img::before {
+    content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+  }
+  .career-img h3 { position: relative; z-index: 1; font-size: 26px; text-align: center; padding: 0 15px; }
+  .career-text ul { margin: 15px 0 0 20px; line-height: 1.8; }
+
+  /* ПОДВАЛ */
+  footer {
+    display: flex; justify-content: space-between; padding: 30px 60px;
+    border-top: 1px solid #222; font-size: 13px; color: #888;
+  }
+
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .career { grid-template-columns: 1fr; }
+    nav { padding: 15px 20px; }
+    nav ul { gap: 15px; font-size: 14px; }
+    section { padding: 60px 20px; }
+    .hero h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">ГОРИЗОНТ<small>БЕЗОПАСНОЕ ЗАВТРА</small></div>
+  <ul>
+    <li><a href="#home">Главная</a></li>
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#careers">Карьера</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <h1>Передовые технологии.</h1>
+</section>
+
+<section class="about" id="about">
+  <h2>О нас</h2>
+  <p>«Горизонт» — глобальная оборонная и научно-технологическая корпорация. Штаб-квартира расположена в Силиконовой долине, у нас более 463 офисов в 62 странах и свыше 800 000 сотрудников по всему миру.</p>
+</section>
+
+<section id="services">
+  <h2>Услуги</h2>
+  <div class="services-grid">
+    <div>
+      <div class="service" style="background-image:url('https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=800')"><h3>Консалтинг<br>по безопасности</h3></div>
+      <p class="service-desc">Снижаем риски и защищаем ваши активы. Наши элитные специалисты готовы к любой угрозе в любой точке планеты.</p>
+    </div>
+    <div>
+      <div class="service" style="background-image:url('https://images.unsplash.com/photo-1541447271487-09612b3f49f7?w=800')"><h3>Стратегическая<br>оборона</h3></div>
+      <p class="service-desc">Автономные стратегические подразделения, готовые к развёртыванию в кратчайшие сроки. Оснащены для задач любой сложности.</p>
+    </div>
+    <div>
+      <div class="service" style="background-image:url('https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800')"><h3>Исследование<br>аномалий</h3></div>
+      <p class="service-desc">«Горизонт» — ведущий первопроходец в новой научной области аномальных явлений.</p>
+    </div>
+    <div>
+      <div class="service" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800')"><h3>Оборонная<br>инженерия</h3></div>
+      <p class="service-desc">Передовые, надёжные и эффективные решения для вашей безопасности — от разработки до производства.</p>
+    </div>
+    <div>
+      <div class="service" style="background-image:url('https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800')"><h3>Наблюдение</h3></div>
+      <p class="service-desc">Новейшие ИИ-системы прогнозируют и оценивают угрозы, давая вам асимметричное преимущество.</p>
+    </div>
+  </div>
+</section>
+
+<section id="careers">
+  <h2>Карьера</h2>
+
+  <div class="career">
+    <div class="career-img" style="background-image:url('https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800')"><h3>Оператор<br>безопасности</h3></div>
+    <div class="career-text">
+      <p>Готовы к приключениям? В роли оператора безопасности «Горизонта» вы будете выполнять сложнейшие миссии по всему миру, защищая наши ключевые активы.</p>
+      <ul>
+        <li>Стрелковая подготовка «Горизонт»: все виды оружия, 90-й процентиль</li>
+        <li>5+ лет военного или частного охранного опыта, желательно спецназ</li>
+        <li>Отличная физическая форма</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="career">
+    <div class="career-img" style="background-image:url('https://images.unsplash.com/photo-1580136608078-4d39a3e4b1b9?w=800')"><h3>Вооружённый охранник<br>научного объекта</h3></div>
+    <div class="career-text">
+      <p>Охраняйте сверхсекретные исследовательские центры от внутренних и внешних угроз. Работайте с ведущими учёными в области аномальных наук.</p>
+      <ul>
+        <li>3+ года службы в армии, полиции или частной охране</li>
+        <li>Сдать стрелковый тест «Горизонт»</li>
+        <li>Соответствовать стандартам физподготовки «Горизонт»</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="career">
+    <div class="career-img" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800')"><h3>Исследователь —<br>аномальные науки</h3></div>
+    <div class="career-text">
+      <p>Хотите совершать смелые открытия в области аномальных наук? «Горизонт» объединяет лучших исследователей и инженеров со всего мира.</p>
+      <ul>
+        <li>Степень PhD в области аномальных наук или материалов</li>
+        <li>3+ года профильного опыта</li>
+        <li>Готовность к частым переездам</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="career">
+    <div class="career-img" style="background-image:url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800')"><h3>Специалист<br>по логистике</h3></div>
+    <div class="career-text">
+      <p>Путешествуйте и знакомьтесь с интересными людьми по всему миру! Вы будете перевозить самое современное оборудование «Горизонта».</p>
+      <ul>
+        <li>Отсутствие судимостей</li>
+        <li>Загранпаспорт</li>
+        <li>Водительские права</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Trepang2.</div>
+  <div><a href="#home">Наверх ↑</a></div>
+</footer>
+
+</body>
+</html>
