@@ -1,1 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horizon OS — Горизонт</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; animation: pageFade 0.5s ease-in; }
+  a { color: #e11; text-decoration: none; }
+  @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
 
+  /* НАВИГАЦИЯ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: rgba(0,0,0,0.85);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: #e11; color: #fff;
+    font-weight: 900; font-size: 26px;
+    clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+  }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-title { font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 2px; }
+  .logo-sub { font-size: 9px; color: #e11; letter-spacing: 2px; margin-top: 5px; font-weight: 700; }
+  nav ul { display: flex; gap: 30px; list-style: none; }
+  nav a { color: #e11; font-weight: 700; }
+
+  /* БАННЕР (как на странице вакансий) */
+  .banner {
+    position: relative;
+    margin-top: 84px;
+    line-height: 0;
+    overflow: hidden;
+  }
+  .banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .banner-fade {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 40%;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0) 0%,
+      rgba(10, 10, 10, 0.6) 50%,
+      rgba(10, 10, 10, 1) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ЗАГОЛОВОК СТРАНИЦЫ */
+  .page-head {
+    padding: 60px 60px 40px;
+    text-align: center;
+  }
+  .page-head h1 { font-size: 52px; font-weight: 900; letter-spacing: 2px; }
+  .page-head p {
+    margin-top: 20px; color: #aaa; font-size: 18px;
+    max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;
+  }
+
+  /* КОНТЕНТ */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 60px 120px;
+  }
+
+  .content h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 60px 0 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .content h2:first-child { margin-top: 0; }
+
+  .content p {
+    color: #ccc;
+    line-height: 1.8;
+    font-size: 17px;
+    margin-bottom: 18px;
+  }
+
+  /* ОСОБЕННОСТИ */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 30px;
+  }
+  .feature {
+    background: #111;
+    border: 1px solid #222;
+    border-left: 4px solid #e11;
+    padding: 30px 30px;
+    transition: all 0.25s ease;
+  }
+  .feature:hover {
+    background: #1a0a0a;
+    border-color: #e11;
+    transform: translateX(6px);
+  }
+  .feature h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .feature p {
+    color: #aaa;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* СРАВНЕНИЕ С КОНКУРЕНТАМИ */
+  .compare {
+    margin-top: 30px;
+    border: 1px solid #222;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #222;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row > div {
+    padding: 18px 24px;
+    font-size: 15px;
+    color: #ccc;
+  }
+  .compare-row.head > div {
+    background: #111;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #888;
+  }
+  .compare-row .os-name { color: #e11; font-weight: 700; }
+  .compare-row .yes { color: #e11; font-weight: 700; }
+  .compare-row .no  { color: #555; }
+
+  /* CTA */
+  .cta {
+    margin-top: 60px;
+    padding: 50px;
+    background: #111;
+    border-left: 4px solid #e11;
+    text-align: center;
+  }
+  .cta h3 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .cta p { color: #aaa; margin-bottom: 26px; font-size: 16px; }
+  .cta a {
+    display: inline-block;
+    padding: 16px 40px;
+    background: #e11;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid #e11;
+    transition: all 0.25s ease;
+  }
+  .cta a:hover { background: transparent; color: #e11; }
+
+  footer {
+    display: flex; justify-content: space-between; padding: 30px 60px;
+    border-top: 1px solid #222; font-size: 13px; color: #888;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 15px 20px; }
+    nav ul { gap: 15px; font-size: 14px; flex-wrap: wrap; }
+    .page-head { padding: 40px 20px 20px; }
+    .page-head h1 { font-size: 32px; }
+    .content { padding: 20px 20px 80px; }
+    .content h2 { font-size: 24px; }
+    .features { grid-template-columns: 1fr; }
+    .compare-row { grid-template-columns: 1fr 1fr; }
+    .compare-row > div:first-child { grid-column: 1 / -1; background: #111; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">G</div>
+    <div class="logo-text">
+      <span class="logo-title">ГОРИЗОНТ</span>
+      <span class="logo-sub">ЗАБОТА. ИННОВАЦИИ. БЕЗОПАСНОСТЬ.</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="index.html#about">О нас</a></li>
+    <li><a href="index.html#services">Услуги</a></li>
+    <li><a href="horizon-os.html">Horizon OS</a></li>
+    <li><a href="careers.html">Вакансии</a></li>
+  </ul>
+</nav>
+
+<section class="banner">
+  <img src="horizon-os.png" alt="Horizon OS — операционная система будущего">
+  <div class="banner-fade"></div>
+</section>
+
+<section class="page-head">
+  <h1>HORIZON OS</h1>
+  <p>Операционная система нового поколения. Разработана корпорацией «Горизонт» как основа цифровой инфраструктуры будущего человечества.</p>
+</section>
+
+<section class="content">
+
+  <h2>Что это такое</h2>
+  <p>Horizon OS — это не просто операционная система. Это единая цифровая среда, объединяющая вычислительные мощности, системы безопасности, медицинские платформы и инфраструктуру корпорации «Горизонт» в единый организм.</p>
+  <p>Разработанная ведущими инженерами корпорации, она обеспечивает беспрецедентный уровень контроля, защиты данных и адаптивности к любым условиям — от офисных терминалов до подземных исследовательских комплексов.</p>
+  <p>Мы верим, что Horizon OS — это фундамент, на котором будет построено будущее человечества.</p>
+
+  <h2>Преимущества</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>АБСОЛЮТНАЯ БЕЗОПАСНОСТЬ</h3>
+      <p>Многоуровневая система шифрования и биометрической идентификации. Взлом Horizon OS на текущий момент не зафиксирован ни разу.</p>
+    </div>
+    <div class="feature">
+      <h3>ЕДИНАЯ ЭКОСИСТЕМА</h3>
+      <p>Полная интеграция со всеми системами корпорации: от систем наблюдения до медицинского оборудования и научных комплексов.</p>
+    </div>
+    <div class="feature">
+      <h3>АДАПТИВНОСТЬ</h3>
+      <p>Работает одинаково стабильно на любом оборудовании — от портативных терминалов до серверных кластеров исследовательских объектов.</p>
+    </div>
+    <div class="feature">
+      <h3>ИИ-ЯДРО</h3>
+      <p>Встроенный искусственный интеллект прогнозирует угрозы, оптимизирует ресурсы и помогает операторам принимать решения в реальном времени.</p>
+    </div>
+    <div class="feature">
+      <h3>АВТОНОМНОСТЬ</h3>
+      <p>Способна работать в изолированных условиях без внешней связи — критически важная функция для объектов «Горизонта» по всему миру.</p>
+    </div>
+    <div class="feature">
+      <h3>ПОСТОЯННЫЕ ОБНОВЛЕНИЯ</h3>
+      <p>Обновления безопасности и функциональности выходят ежемесячно. Поддержка каждой версии — не менее 10 лет.</p>
+    </div>
+  </div>
+
+  <h2>Сравнение с конкурентами</h2>
+  <div class="compare">
+    <div class="compare-row head">
+      <div>Характеристика</div>
+      <div>Horizon OS</div>
+      <div>ОС A</div>
+      <div>ОС B</div>
+    </div>
+    <div class="compare-row">
+      <div>Уровень шифрования</div>
+      <div class="yes">Максимальный</div>
+      <div class="no">Стандартный</div>
+      <div class="no">Стандартный</div>
+    </div>
+    <div class="compare-row">
+      <div>ИИ-ядро</div>
+      <div class="yes">Встроено</div>
+      <div class="no">Нет</div>
+      <div class="no">Опционально</div>
+    </div>
+    <div class="compare-row">
+      <div>Работа без сети</div>
+      <div class="yes">Полная</div>
+      <div class="no">Ограниченная</div>
+      <div class="no">Нет</div>
+    </div>
+    <div class="compare-row">
+      <div>Интеграция с оборудованием</div>
+      <div class="yes">Универсальная</div>
+      <div class="no">Ограниченная</div>
+      <div class="no">Ограниченная</div>
+    </div>
+    <div class="compare-row">
+      <div>Поддержка</div>
+      <div class="yes">10+ лет</div>
+      <div class="no">3–5 лет</div>
+      <div class="no">2–4 года</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>ПРИСОЕДИНЯЙТЕСЬ К БУДУЩЕМУ</h3>
+    <p>Horizon OS уже развёрнута на всех объектах корпорации. Станьте частью команды, которая строит технологии завтрашнего дня.</p>
+    <a href="careers.html">Открытые вакансии</a>
+  </div>
+
+</section>
+
+<footer>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в Роблоксе.</div>
+  <div><a href="index.html">← На главную</a></div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href$=".html"], a[href*=".html?"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http')) return;
+      e.preventDefault();
+      document.body.style.transition = 'opacity 0.4s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = href; }, 400);
+    });
+  });
+</script>
+
+</body>
+</html>
