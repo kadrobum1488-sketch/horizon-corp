@@ -30,98 +30,43 @@
   nav ul { display: flex; gap: 30px; list-style: none; }
   nav a { color: #e11; font-weight: 700; }
 
-  .vacancy-page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 180px 60px 120px;
-  }
-
-  .vacancy-page .back {
-    display: inline-block;
-    margin-bottom: 30px;
-    font-size: 14px;
-    color: #888;
-    transition: color 0.25s;
-  }
+  .vacancy-page { max-width: 900px; margin: 0 auto; padding: 180px 60px 120px; }
+  .vacancy-page .back { display: inline-block; margin-bottom: 30px; font-size: 14px; color: #888; transition: color 0.25s; }
   .vacancy-page .back:hover { color: #e11; }
 
-  .vacancy-page h1 {
-    font-size: 42px;
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: #fff;
-  }
+  .vacancy-page h1 { font-size: 42px; font-weight: 900; line-height: 1.2; margin-bottom: 20px; color: #fff; }
 
   .vacancy-page .meta {
-    display: flex; gap: 24px; flex-wrap: wrap;
-    font-size: 13px; color: #888;
-    text-transform: uppercase; letter-spacing: 1px;
-    margin-bottom: 40px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #222;
+    display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; color: #888;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 40px;
+    padding-bottom: 30px; border-bottom: 1px solid #222;
   }
   .vacancy-page .meta span::before { content: '•  '; color: #e11; }
 
   .vacancy-page h2 {
-    font-size: 22px;
-    font-weight: 700;
-    margin: 40px 0 18px;
-    color: #fff;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 22px; font-weight: 700; margin: 40px 0 18px; color: #fff;
+    letter-spacing: 1px; text-transform: uppercase;
   }
-
-  .vacancy-page p {
-    color: #ccc;
-    line-height: 1.7;
-    font-size: 16px;
-    margin-bottom: 14px;
-  }
-
-  .vacancy-page ul {
-    list-style: none;
-    padding: 0;
-  }
+  .vacancy-page p { color: #ccc; line-height: 1.7; font-size: 16px; margin-bottom: 14px; }
+  .vacancy-page ul { list-style: none; padding: 0; }
   .vacancy-page ul li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 12px;
-    color: #ccc;
-    line-height: 1.6;
-    font-size: 16px;
+    position: relative; padding-left: 24px; margin-bottom: 12px;
+    color: #ccc; line-height: 1.6; font-size: 16px;
   }
   .vacancy-page ul li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 10px;
-    width: 8px; height: 8px;
-    background: #e11;
-    transform: rotate(45deg);
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 8px; height: 8px; background: #e11; transform: rotate(45deg);
   }
 
   .apply-btn {
-    display: inline-block;
-    margin-top: 40px;
-    padding: 16px 40px;
-    background: #e11;
-    color: #fff;
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.25s ease;
+    display: inline-block; margin-top: 40px; padding: 16px 40px;
+    background: #e11; color: #fff; font-weight: 700; font-size: 16px;
+    letter-spacing: 1px; text-transform: uppercase; transition: all 0.25s ease;
     border: 2px solid #e11;
   }
-  .apply-btn:hover {
-    background: transparent;
-    color: #e11;
-  }
+  .apply-btn:hover { background: transparent; color: #e11; }
 
-  footer {
-    display: flex; justify-content: space-between; padding: 30px 60px;
-    border-top: 1px solid #222; font-size: 13px; color: #888;
-  }
+  footer { display: flex; justify-content: space-between; padding: 30px 60px; border-top: 1px solid #222; font-size: 13px; color: #888; }
 
   @media (max-width: 900px) {
     nav { padding: 15px 20px; }
@@ -156,11 +101,11 @@
   <h1 id="title">Загрузка...</h1>
   <div class="meta" id="meta"></div>
   <div id="body"></div>
-  <a href="#" class="apply-btn">Отправить резюме</a>
+  <a href="apply.html" class="apply-btn" id="applyBtn">Отправить резюме</a>
 </section>
 
 <footer>
-  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в роблоксе.</div>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в Roblox.</div>
   <div><a href="index.html">← На главную</a></div>
 </footer>
 
@@ -168,7 +113,7 @@
   const vacancies = {
     engineering: {
       title: 'Начальник инженерно-технического управления',
-      meta: ['Объект: Институт Институт «Байкал»', 'Уровень допуска: 2', 'Полная занятость'],
+      meta: ['Штаб-квартира: Силиконовая долина', 'Уровень допуска: GAMMA', 'Полная занятость'],
       description: 'Руководство инженерно-техническим управлением корпорации «Горизонт». Вы отвечаете за проектирование, модернизацию и бесперебойную работу инфраструктуры всех объектов корпорации по всему миру.',
       duties: [
         'Стратегическое планирование инженерной инфраструктуры корпорации',
@@ -185,7 +130,7 @@
     },
     baikal: {
       title: 'Начальник службы безопасности Института «Байкал»',
-      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 4', 'Полная занятость'],
+      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: SIGMA', 'Полная занятость'],
       description: 'Институт «Байкал» — один из ключевых исследовательских объектов корпорации. Вам предстоит обеспечить безопасность института, его персонала и результатов научной работы.',
       duties: [
         'Организация охраны периметра и внутренних помещений',
@@ -202,7 +147,7 @@
     },
     granit: {
       title: 'Командир отряда специального реагирования «Гранит»',
-      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 4', 'Полная занятость'],
+      meta: ['Мобильный офис', 'Уровень допуска: GAMMA', 'Полная занятость'],
       description: '«Гранит» — элитное подразделение корпорации, выполняющее задачи повышенной сложности по всему миру. Вам предстоит командовать оперативниками и отвечать за успех каждой миссии.',
       duties: [
         'Командование оперативными группами в зонах повышенного риска',
@@ -219,7 +164,7 @@
     },
     medical: {
       title: 'Начальник медицинского управления',
-      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 3', 'Полная занятость'],
+      meta: ['Штаб-квартира: Силиконовая долина', 'Уровень допуска: BETA', 'Полная занятость'],
       description: 'Медицинское управление отвечает за здоровье сотрудников корпорации на всех объектах. От вашей работы зависит, насколько эффективно корпорация выполняет свои задачи.',
       duties: [
         'Руководство медицинскими центрами корпорации по всему миру',
@@ -236,7 +181,7 @@
     },
     internal: {
       title: 'Начальник внутренней службы безопасности',
-      meta: ['Объект: Институт «Байкал»', 'Уровень допуска: 5', 'Полная занятость'],
+      meta: ['Штаб-квартира: Силиконовая долина', 'Уровень допуска: GAMMA', 'Полная занятость'],
       description: 'Внутренняя безопасность корпорации — это защита от угроз изнутри. Вам предстоит работать с персоналом, проверять благонадёжность и предотвращать утечки информации.',
       duties: [
         'Проверка персонала при приёме на работу и в процессе деятельности',
@@ -272,9 +217,9 @@
       <h2>Требования</h2>
       <ul>${vac.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
     `;
+    document.getElementById('applyBtn').href = 'apply.html?id=' + id;
   }
 
-  // Плавный переход по ссылкам
   document.querySelectorAll('a[href$=".html"], a[href*=".html?"]').forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
