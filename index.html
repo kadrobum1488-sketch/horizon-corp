@@ -149,7 +149,94 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
     display: flex; justify-content: space-between; padding: 30px 60px;
     border-top: 1px solid #222; font-size: 13px; color: #888;
   }
+/* КАРТА ОБЪЕКТОВ */
+.objects-section {
+  padding: 100px 60px;
+}
+.objects-sub {
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+  max-width: 800px;
+  margin: 0 auto 50px;
+  line-height: 1.6;
+}
 
+.map-wrap {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  border: 1px solid #222;
+  overflow: hidden;
+}
+.map-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 5;
+}
+.point-dot {
+  width: 14px;
+  height: 14px;
+  background: #e11;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(238, 17, 17, 0.7);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(238, 17, 17, 0.7); }
+  70%  { box-shadow: 0 0 0 18px rgba(238, 17, 17, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(238, 17, 17, 0); }
+}
+
+.point-label {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10, 10, 10, 0.95);
+  border-left: 3px solid #e11;
+  padding: 10px 16px;
+  min-width: 200px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+.point-label strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.point-label span {
+  display: block;
+  color: #888;
+  font-size: 12px;
+  margin-top: 3px;
+}
+.map-point:hover .point-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.map-point.label-left .point-label {
+  left: auto;
+  right: 24px;
+  border-left: none;
+  border-right: 3px solid #e11;
+}
   @media (max-width: 900px) {
     .services-grid { grid-template-columns: 1fr 1fr; }
     .career { grid-template-columns: 1fr; }
@@ -157,6 +244,16 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
     nav ul { gap: 15px; font-size: 14px; }
     section { padding: 60px 20px; }
     .hero h1 { font-size: 32px; }
+     .objects-section { padding: 60px 20px; }
+  .point-dot { width: 10px; height: 10px; }
+  .point-label {
+    min-width: 140px;
+    padding: 6px 10px;
+    left: 16px;
+  }
+  .point-label strong { font-size: 12px; }
+  .point-label span { font-size: 10px; }
+  .map-point.label-left .point-label { right: 16px; }
   }
 </style>
 </head>
@@ -191,6 +288,121 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
 <section class="about" id="about">
   <h2>О нас</h2>
   <p>«Горизонт» — глобальная оборонная и научно-технологическая корпорация. Штаб-квартира расположена в Москве, у нас более 463 офисов в 62 странах и свыше 800 000 сотрудников по всему миру.</p>
+</section>
+
+ <section id="objects" class="objects-section">
+  <h2>Ключевые объекты корпорации</h2>
+  <p class="objects-sub">Более 463 офисов в 62 странах. Ниже — стратегически важные объекты, информация о которых рассекречена.</p>
+
+  <div class="map-wrap">
+    <img src="world-map.png" alt="Карта объектов корпорации «Горизонт»" class="map-img">
+
+    <!-- ТОЧКИ ОБЪЕКТОВ -->
+    <div class="map-point" style="left: 53.5%; top: 27%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Штаб-квартира «Горизонт»</strong>
+        <span>Москва, Россия</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 76%; top: 30%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Институт «Байкал»</strong>
+        <span>Озеро Байкал, Россия</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 8%; top: 22%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Зона-14</strong>
+        <span>Аляска, США</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 6%; top: 47%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Комплекс «Альфа»</strong>
+        <span>Тихий океан</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 68%; top: 12%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Зона-83</strong>
+        <span>Север России</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 79%; top: 47%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>ЦОД «Железный Дракон»</strong>
+        <span>Таиланд</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 53%; top: 20%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Комплекс «Гуннарсон»</strong>
+        <span>Стокгольм, Швеция</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 38%; top: 12%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Нефтяная вышка</strong>
+        <span>Возле берегов Гренландии</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 19%; top: 25%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Институт «Азгард»</strong>
+        <span>Канада</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 21%; top: 40%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Зона-19</strong>
+        <span>Флорида, США</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 47%; top: 23%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Шахта Келлингтон</strong>
+        <span>Великобритания</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 49%; top: 29%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Замок «Мерсиз»</strong>
+        <span>Франция</span>
+      </div>
+    </div>
+
+    <div class="map-point" style="left: 51%; top: 45%;">
+      <div class="point-dot"></div>
+      <div class="point-label">
+        <strong>Зона-50</strong>
+        <span>Северная Африка</span>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <section id="services">
