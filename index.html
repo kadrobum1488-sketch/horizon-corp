@@ -237,6 +237,152 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
   border-left: none;
   border-right: 3px solid #e11;
 }
+ 
+ /* БЛОК ЗВОНКА */
+.call-section {
+  padding: 100px 60px;
+  text-align: center;
+}
+.call-sub {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.call-widget {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #111;
+  border: 1px solid #222;
+  border-left: 4px solid #e11;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+.call-widget.active {
+  border-color: #e11;
+  box-shadow: 0 0 0 1px #e11, 0 10px 40px rgba(238, 17, 17, 0.2);
+}
+
+/* Шапка виджета */
+.call-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: #0d0d0d;
+  border-bottom: 1px solid #222;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+}
+.call-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #555;
+  transition: background 0.3s ease;
+}
+.call-widget.active .call-dot {
+  background: #e11;
+  animation: callPulse 1.2s infinite;
+}
+@keyframes callPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* Основная часть */
+.call-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 24px;
+}
+.call-icon {
+  font-size: 42px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+.call-widget.active .call-icon {
+  animation: callShake 0.4s infinite;
+}
+@keyframes callShake {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-12deg); }
+  75%      { transform: rotate(12deg); }
+}
+
+.call-info { flex: 1; text-align: left; }
+.call-number {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+}
+.call-label {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Кнопка */
+.call-btn {
+  padding: 14px 32px;
+  background: #e11;
+  color: #fff;
+  border: 2px solid #e11;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.call-btn:hover {
+  background: transparent;
+  color: #e11;
+}
+.call-btn.hangup {
+  background: transparent;
+  color: #e11;
+}
+.call-btn.hangup:hover {
+  background: #e11;
+  color: #fff;
+}
+
+/* Надпись о записи */
+.call-recording {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: #1a0505;
+  border-top: 1px solid #e11;
+  font-size: 12px;
+  color: #e11;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.call-recording.visible {
+  display: flex;
+}
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  background: #e11;
+  border-radius: 50%;
+  animation: recPulse 1s infinite;
+}
+@keyframes recPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+}
   @media (max-width: 900px) {
     .services-grid { grid-template-columns: 1fr 1fr; }
     .career { grid-template-columns: 1fr; }
@@ -245,6 +391,9 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
     section { padding: 60px 20px; }
     .hero h1 { font-size: 32px; }
      .objects-section { padding: 60px 20px; }
+     .call-section { padding: 60px 20px; }
+  .call-body { flex-direction: column; text-align: center; }
+  .call-info { text-align: center; }
   .point-dot { width: 10px; height: 10px; }
   .point-label {
     min-width: 140px;
@@ -418,6 +567,35 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
   </div>
 </section>
 
+ <section id="call" class="call-section">
+  <h2>Связаться с корпорацией</h2>
+  <p class="call-sub">Единый центр обработки обращений «Горизонт». Работаем круглосуточно.</p>
+
+  <div class="call-widget">
+    <div class="call-header">
+      <div class="call-dot"></div>
+      <span id="callStatus">Линия свободна</span>
+    </div>
+
+    <div class="call-body">
+      <div class="call-icon" id="callIcon">📞</div>
+      <div class="call-info">
+        <div class="call-number">+7 (495) 000-14-88</div>
+        <div class="call-label">Единая линия корпорации</div>
+      </div>
+      <button class="call-btn" id="callBtn">Позвонить</button>
+    </div>
+
+    <div class="call-recording" id="callRecording">
+      <div class="rec-dot"></div>
+      <span>Внутренней Службой Безопасности «Горизонта» ваш звонок записывается</span>
+    </div>
+
+    <audio id="callAudio" src="horizon-call.mp3" preload="auto"></audio>
+    <audio id="ringAudio" src="ring.mp3" preload="auto"></audio>
+  </div>
+</section>
+
 <section id="careers">
   <h2>Карьера</h2>
 
@@ -474,6 +652,66 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
   <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в роблоксе.</div>
   <div><a href="#home">Наверх ↑</a></div>
 </footer>
+
+ <script>
+  const callBtn = document.getElementById('callBtn');
+  const callWidget = document.querySelector('.call-widget');
+  const callStatus = document.getElementById('callStatus');
+  const callRecording = document.getElementById('callRecording');
+  const callAudio = document.getElementById('callAudio');
+  const ringAudio = document.getElementById('ringAudio');
+
+  let isCalling = false;
+
+  callBtn.addEventListener('click', () => {
+    if (!isCalling) {
+      // НАЧАЛО ЗВОНКА
+      isCalling = true;
+      callWidget.classList.add('active');
+      callRecording.classList.add('visible');
+      callStatus.textContent = 'Соединение...';
+      callBtn.textContent = 'Положить трубку';
+      callBtn.classList.add('hangup');
+
+      if (ringAudio && ringAudio.src) {
+        ringAudio.loop = true;
+        ringAudio.play().catch(() => {});
+        setTimeout(() => {
+          ringAudio.pause();
+          ringAudio.currentTime = 0;
+          playAnswer();
+        }, 2500);
+      } else {
+        setTimeout(playAnswer, 1500);
+      }
+    } else {
+      // КОНЕЦ ЗВОНКА
+      stopCall();
+    }
+  });
+
+  function playAnswer() {
+    callStatus.textContent = 'Линия активна';
+    callAudio.play().catch(() => {});
+  }
+
+  function stopCall() {
+    isCalling = false;
+    callWidget.classList.remove('active');
+    callRecording.classList.remove('visible');
+    callStatus.textContent = 'Линия свободна';
+    callBtn.textContent = 'Позвонить';
+    callBtn.classList.remove('hangup');
+    callAudio.pause();
+    callAudio.currentTime = 0;
+    if (ringAudio) {
+      ringAudio.pause();
+      ringAudio.currentTime = 0;
+    }
+  }
+
+  callAudio.addEventListener('ended', stopCall);
+</script>
 
 </body>
 </html>
