@@ -149,6 +149,46 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
     display: flex; justify-content: space-between; padding: 30px 60px;
     border-top: 1px solid #222; font-size: 13px; color: #888;
   }
+
+ /* СКРЫТЫЙ ДОСТУП */
+.classified-access {
+  text-align: center;
+  padding: 30px 20px 60px;
+}
+.classified-input {
+  width: 160px;
+  padding: 12px 16px;
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  color: #555;
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+.classified-input:focus {
+  outline: none;
+  border-color: #e11;
+  background: #1a0505;
+  color: #e11;
+}
+.classified-input::placeholder {
+  color: #333;
+  letter-spacing: 6px;
+}
+.classified-hint {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #333;
+  letter-spacing: 1px;
+  height: 14px;
+  text-transform: uppercase;
+}
+.classified-hint.error { color: #e11; }
+.classified-hint.success { color: #4a4; }
+ 
 /* КАРТА ОБЪЕКТОВ */
 .objects-section {
   padding: 100px 60px;
@@ -653,6 +693,12 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
   <div><a href="#home">Наверх ↑</a></div>
 </footer>
 
+ <!-- СКРЫТЫЙ ДОСТУП К СЕКРЕТНОЙ СТРАНИЦЕ -->
+<div class="classified-access">
+  <input type="text" id="classifiedCode" class="classified-input" placeholder="• • • • •" maxlength="5" autocomplete="off">
+  <div class="classified-hint" id="classifiedHint"></div>
+</div>
+ 
  <script>
   const callBtn = document.getElementById('callBtn');
   const callWidget = document.querySelector('.call-widget');
@@ -711,6 +757,41 @@ section { padding: 100px 60px; scroll-margin-top: 80px; }
   }
 
   callAudio.addEventListener('ended', stopCall);
+
+    // СЕКРЕТНЫЙ ДОСТУП
+  const classifiedCode = document.getElementById('classifiedCode');
+  const classifiedHint = document.getElementById('classifiedHint');
+  const SECRET_CODE = '14880'; // ← поменяй на свой код
+
+  if (classifiedCode) {
+    classifiedCode.addEventListener('input', (e) => {
+      const value = e.target.value.trim();
+      classifiedHint.className = 'classified-hint';
+
+      if (value.length === 5) {
+        if (value === SECRET_CODE) {
+          classifiedHint.textContent = 'Доступ разрешён...';
+          classifiedHint.classList.add('success');
+          setTimeout(() => {
+            document.body.style.transition = 'opacity 0.4s ease';
+            document.body.style.opacity = '0';
+            setTimeout(() => { window.location.href = 'classified.html'; }, 400);
+          }, 500);
+        } else {
+          classifiedHint.textContent = 'Неверный код доступа';
+          classifiedHint.classList.add('error');
+          setTimeout(() => {
+            e.target.value = '';
+            classifiedHint.textContent = '';
+            classifiedHint.className = 'classified-hint';
+          }, 1800);
+        }
+      } else {
+        classifiedHint.textContent = '';
+      }
+    });
+  }
+  
 </script>
 
 </body>
