@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>СЕКРЕТНО — Горизонт</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; animation: pageFade 0.5s ease-in; }
+  a { color: #e11; text-decoration: none; }
+  @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: rgba(0,0,0,0.85);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: #e11; color: #fff;
+    font-weight: 900; font-size: 26px;
+    clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+  }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-title { font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 2px; }
+  .logo-sub { font-size: 9px; color: #e11; letter-spacing: 2px; margin-top: 5px; font-weight: 700; }
+  nav ul { display: flex; gap: 24px; list-style: none; }
+  nav a { color: #e11; font-weight: 700; font-size: 14px; }
+
+  /* ПРЕДУПРЕЖДЕНИЕ */
+  .classified-head {
+    padding: 160px 60px 40px;
+    text-align: center;
+    border-bottom: 1px solid #1a0505;
+  }
+  .stamp {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 3px solid #e11;
+    color: #e11;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    margin-bottom: 24px;
+    transform: rotate(-3deg);
+  }
+  .classified-head h1 {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .classified-head p {
+    color: #888;
+    font-size: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .classified-meta {
+    display: flex; justify-content: center; gap: 40px;
+    margin-top: 30px; flex-wrap: wrap;
+    font-size: 12px; color: #555;
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  .classified-meta span::before { content: '•  '; color: #e11; }
+
+  /* СТАТИСТИКА */
+  .stats {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 60px 120px;
+  }
+
+  .stats h2 {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #fff;
+    margin: 50px 0 24px;
+    text-transform: uppercase;
+    border-left: 4px solid #e11;
+    padding-left: 20px;
+  }
+  .stats h2:first-child { margin-top: 0; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .stat-card {
+    background: #111;
+    border: 1px solid #222;
+    border-top: 3px solid #e11;
+    padding: 30px 24px;
+    transition: all 0.25s ease;
+  }
+  .stat-card:hover {
+    background: #1a0a0a;
+    border-color: #e11;
+    transform: translateY(-4px);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+  .stat-value {
+    font-size: 42px;
+    font-weight: 900;
+    color: #e11;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .stat-change {
+    font-size: 13px;
+    margin-top: 12px;
+    color: #888;
+  }
+  .stat-change.positive { color: #4a4; }
+  .stat-change.negative { color: #e11; }
+
+  /* ТАБЛИЦА */
+  .loss-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .loss-table th, .loss-table td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .loss-table th {
+    background: #111;
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .loss-table td { color: #ccc; }
+  .loss-table tr:hover td { background: #0d0d0d; }
+  .loss-table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+  .loss-table .loss { color: #e11; }
+  .loss-table .gain { color: #4a4; }
+
+  /* ОЦЕНКА ОБСТАНОВКИ */
+  .assessment {
+    margin-top: 40px;
+    padding: 40px;
+    background: #111;
+    border-left: 4px solid #e11;
+  }
+  .assessment h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .assessment p {
+    color: #bbb;
+    line-height: 1.7;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .assessment .status {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #1a0505;
+    border: 1px solid #e11;
+    color: #e11;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  footer {
+    display: flex; justify-content: space-between; padding: 30px 60px;
+    border-top: 1px solid #222; font-size: 13px; color: #888;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 15px 20px; }
+    nav ul { gap: 12px; font-size: 12px; flex-wrap: wrap; }
+    .classified-head { padding: 130px 20px 30px; }
+    .classified-head h1 { font-size: 26px; }
+    .stamp { font-size: 18px; padding: 8px 18px; }
+    .stats { padding: 40px 20px 80px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .stat-value { font-size: 32px; }
+    .loss-table th, .loss-table td { padding: 10px 12px; font-size: 12px; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">G</div>
+    <div class="logo-text">
+      <span class="logo-title">ГОРИЗОНТ</span>
+      <span class="logo-sub">ЗАБОТА. ИННОВАЦИИ. БЕЗОПАСНОСТЬ.</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="index.html#about">О нас</a></li>
+    <li><a href="index.html#services">Услуги</a></li>
+    <li><a href="horizon-os.html">Horizon OS</a></li>
+    <li><a href="careers.html">Вакансии</a></li>
+  </ul>
+</nav>
+
+<section class="classified-head">
+  <div class="stamp">СЕКРЕТНО</div>
+  <h1>СТАТИСТИКА КОРПОРАЦИИ</h1>
+  <p>Внутренний отчёт о потерях и пополнениях корпорации «Горизонт» за 2026 год. Документ содержит сведения ограниченного доступа. Разглашение влечёт уголовную ответственность согласно внутреннему регламенту СВБ.</p>
+
+  <div class="classified-meta">
+    <span>Отчёт № СВБ-2026-1488</span>
+    <span>Дата формирования: 14.10.2026</span>
+    <span>Уровень допуска: 5+</span>
+  </div>
+</section>
+
+<section class="stats">
+
+  <h2>Людские ресурсы</h2>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Потери персонала</div>
+      <div class="stat-value">148</div>
+      <div class="stat-change negative">↑ 12% к прошлому году</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Принято на службу</div>
+      <div class="stat-value">312</div>
+      <div class="stat-change positive">↑ 24% к прошлому году</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Чистое пополнение</div>
+      <div class="stat-value">+164</div>
+      <div class="stat-change positive">Штат укомплектован на 94%</div>
+    </div>
+  </div>
+
+  <h2>Техника и вооружение</h2>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Потеряно единиц техники</div>
+      <div class="stat-value">27</div>
+      <div class="stat-change negative">↑ 8% к прошлому году</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Восполнено единиц</div>
+      <div class="stat-value">41</div>
+      <div class="stat-change positive">↑ 18% к прошлому году</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Боеготовность</div>
+      <div class="stat-value">91%</div>
+      <div class="stat-change positive">В пределах нормы</div>
+    </div>
+  </div>
+
+  <h2>Объекты и инфраструктура</h2>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Объектов повреждено</div>
+      <div class="stat-value">3</div>
+      <div class="stat-change negative">Зона-14, Комплекс «Альфа», ЦОД «Железный Дракон»</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Объектов восстановлено</div>
+      <div class="stat-value">5</div>
+      <div class="stat-change positive">Работы завершены в срок</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Инфраструктура</div>
+      <div class="stat-value">87%</div>
+      <div class="stat-change positive">Удовлетворительное состояние</div>
+    </div>
+  </div>
+
+  <h2>Детализация потерь</h2>
+  <table class="loss-table">
+    <thead>
+      <tr>
+        <th>Категория</th>
+        <th class="num">Потеряно</th>
+        <th class="num">Восполнено</th>
+        <th class="num">Итог</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Оперативный состав</td>
+        <td class="num loss">62</td>
+        <td class="num gain">148</td>
+        <td class="num gain">+86</td>
+      </tr>
+      <tr>
+        <td>Научный персонал</td>
+        <td class="num loss">18</td>
+        <td class="num gain">54</td>
+        <td class="num gain">+36</td>
+      </tr>
+      <tr>
+        <td>Инженерно-технический состав</td>
+        <td class="num loss">24</td>
+        <td class="num gain">47</td>
+        <td class="num gain">+23</td>
+      </tr>
+      <tr>
+        <td>Медицинский персонал</td>
+        <td class="num loss">9</td>
+        <td class="num gain">28</td>
+        <td class="num gain">+19</td>
+      </tr>
+      <tr>
+        <td>Линейный персонал</td>
+        <td class="num loss">35</td>
+        <td class="num gain">35</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Техника (единиц)</td>
+        <td class="num loss">27</td>
+        <td class="num gain">41</td>
+        <td class="num gain">+14</td>
+      </tr>
+      <tr>
+        <td>Вооружение (единиц)</td>
+        <td class="num loss">14</td>
+        <td class="num gain">28</td>
+        <td class="num gain">+14</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Оценка общей обстановки</h2>
+  <div class="assessment">
+    <h3>Заключение Службы Внутренней Безопасности</h3>
+    <p>Несмотря на потери личного состава и техники, корпорация сохраняет оперативную способность на должном уровне. Показатели пополнения превышают показатели потерь по всем ключевым категориям.</p>
+    <p>Наибольшую озабоченность вызывает инцидент на объекте «Ареал-7» (август 2026 года), повлёкший невосполнимые потери среди научного персонала. Расследование продолжается под контролем Управления дисциплинарных расследований.</p>
+    <p>Кадровая политика корпорации демонстрирует положительную динамику. Привлечение новых специалистов идёт в соответствии с планом, штат укомплектован на 94%.</p>
+    <p>Рекомендовано: усилить меры безопасности на стратегических объектах, продолжить набор персонала, активизировать работу отряда «Гранит» в зонах повышенного риска.</p>
+
+    <div class="status">Обстановка стабильная</div>
+  </div>
+
+</section>
+
+<footer>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в Роблоксе.</div>
+  <div><a href="index.html">← На главную</a></div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href$=".html"], a[href*=".html?"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http')) return;
+      e.preventDefault();
+      document.body.style.transition = 'opacity 0.4s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = href; }, 400);
+    });
+  });
+</script>
+
+</body>
+</html>
