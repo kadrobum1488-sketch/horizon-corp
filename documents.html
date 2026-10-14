@@ -1,1 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Документы — Горизонт</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #0a0a0a; color: #fff; scroll-behavior: smooth; animation: pageFade 0.5s ease-in; }
+  a { color: #e11; text-decoration: none; }
+  @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
 
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: rgba(0,0,0,0.85);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: #e11; color: #fff;
+    font-weight: 900; font-size: 26px;
+    clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+  }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-title { font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 2px; }
+  .logo-sub { font-size: 9px; color: #e11; letter-spacing: 2px; margin-top: 5px; font-weight: 700; }
+  nav ul { display: flex; gap: 24px; list-style: none; }
+  nav a { color: #e11; font-weight: 700; font-size: 14px; }
+
+  /* ЗАГОЛОВОК */
+  .docs-head {
+    padding: 160px 60px 40px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .docs-head h1 {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .docs-head .divider {
+    width: 80px; height: 4px; background: #e11;
+    margin: 20px auto;
+  }
+  .docs-head p {
+    color: #888;
+    font-size: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* РЕКВИЗИТЫ */
+  .requisites {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    padding: 0 60px;
+  }
+  .requisites h2 {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    border-left: 4px solid #e11;
+    padding-left: 20px;
+  }
+  .req-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+    background: #111;
+    border: 1px solid #222;
+    padding: 30px 40px;
+  }
+  .req-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 14px;
+  }
+  .req-row .label { color: #777; }
+  .req-row .value { color: #eee; font-weight: 700; text-align: right; }
+  .req-row:last-child { border-bottom: none; }
+
+  /* ДОКУМЕНТЫ */
+  .docs-section {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    padding: 0 60px;
+  }
+  .docs-section h2 {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    border-left: 4px solid #e11;
+    padding-left: 20px;
+  }
+  .docs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .doc-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    background: #111;
+    border: 1px solid #222;
+    border-left: 4px solid #333;
+    padding: 20px 30px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .doc-item:hover {
+    background: #1a0a0a;
+    border-color: #e11;
+    border-left-color: #e11;
+    transform: translateX(6px);
+  }
+  .doc-icon {
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: #e11; color: #fff;
+    font-size: 20px; font-weight: 900;
+    border-radius: 4px;
+  }
+  .doc-info .title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .doc-info .meta {
+    font-size: 12px;
+    color: #777;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .doc-actions {
+    display: flex; gap: 10px;
+  }
+  .doc-actions a {
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid #e11;
+    color: #e11;
+    transition: all 0.25s ease;
+  }
+  .doc-actions a:hover {
+    background: #e11;
+    color: #fff;
+  }
+
+  /* МОДАЛЬНОЕ ОКНО */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .modal.active { display: flex; }
+  .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    max-height: 90vh;
+    background: #111;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    background: #0d0d0d;
+    border-bottom: 1px solid #222;
+  }
+  .modal-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #eee;
+    letter-spacing: 0.5px;
+  }
+  .modal-close {
+    background: transparent;
+    border: none;
+    color: #e11;
+    font-size: 24px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    padding: 0 10px;
+    line-height: 1;
+  }
+  .modal-close:hover { color: #fff; }
+  .modal-body {
+    flex: 1;
+    overflow: hidden;
+  }
+  .modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+  }
+
+  footer {
+    display: flex; justify-content: space-between; padding: 30px 60px;
+    border-top: 1px solid #222; font-size: 13px; color: #888;
+    margin-top: 80px;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 15px 20px; }
+    nav ul { gap: 12px; font-size: 12px; flex-wrap: wrap; }
+    .docs-head { padding: 130px 20px 30px; }
+    .docs-head h1 { font-size: 28px; }
+    .requisites, .docs-section { padding: 0 20px; }
+    .req-grid { grid-template-columns: 1fr; padding: 20px; }
+    .doc-item { grid-template-columns: 44px 1fr; gap: 16px; padding: 16px 20px; }
+    .doc-actions { grid-column: 1 / -1; justify-content: flex-start; }
+    footer { flex-direction: column; gap: 10px; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">G</div>
+    <div class="logo-text">
+      <span class="logo-title">ГОРИЗОНТ</span>
+      <span class="logo-sub">ЗАБОТА. ИННОВАЦИИ. БЕЗОПАСНОСТЬ.</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="index.html#about">О нас</a></li>
+    <li><a href="index.html#services">Услуги</a></li>
+    <li><a href="horizon-os.html">Horizon OS</a></li>
+    <li><a href="careers.html">Вакансии</a></li>
+    <li><a href="documents.html">Документы</a></li>
+  </ul>
+</nav>
+
+<section class="docs-head">
+  <h1>ДОКУМЕНТЫ</h1>
+  <div class="divider"></div>
+  <p>Официальные документы корпорации «Горизонт», подтверждающие её законную деятельность. Часть документов доступна для просмотра, остальные находятся в закрытом архиве.</p>
+</section>
+
+<!-- РЕКВИЗИТЫ -->
+<section class="requisites">
+  <h2>Реквизиты корпорации</h2>
+  <div class="req-grid">
+    <div class="req-row">
+      <span class="label">Полное наименование</span>
+      <span class="value">ООО «Корпорация „Горизонт"»</span>
+    </div>
+    <div class="req-row">
+      <span class="label">ИНН</span>
+      <span class="value">7714880148</span>
+    </div>
+    <div class="req-row">
+      <span class="label">КПП</span>
+      <span class="value">771401001</span>
+    </div>
+    <div class="req-row">
+      <span class="label">ОГРН</span>
+      <span class="value">1147746014880</span>
+    </div>
+    <div class="req-row">
+      <span class="label">ОКПО</span>
+      <span class="value">14881488</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Юридический адрес</span>
+      <span class="value">125167, г. Москва, Ленинградский пр-т, д. 47, стр. 2, офис 1488</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Генеральный директор</span>
+      <span class="value">Волков Игорь Анатольевич</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Главный бухгалтер</span>
+      <span class="value">Соколова Марина Викторовна</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Расчётный счёт</span>
+      <span class="value">40702810400000148801</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Банк</span>
+      <span class="value">ПАО Сбербанк, г. Москва</span>
+    </div>
+    <div class="req-row">
+      <span class="label">БИК</span>
+      <span class="value">044525225</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Корр. счёт</span>
+      <span class="value">30101810400000000225</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Телефон</span>
+      <span class="value">+7 (495) 000-14-88</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Email</span>
+      <span class="value">info@horizon-corp.ru</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Дата регистрации</span>
+      <span class="value">14 августа 1994 года</span>
+    </div>
+    <div class="req-row">
+      <span class="label">Основной ОКВЭД</span>
+      <span class="value">72.19 — Научные исследования и разработки</span>
+    </div>
+  </div>
+</section>
+
+<!-- ДОКУМЕНТЫ -->
+<section class="docs-section">
+  <h2>Открытые документы</h2>
+  <div class="docs-list">
+
+    <div class="doc-item" onclick="openDoc('doc-01-ogrn.pdf', 'Свидетельство ОГРН')">
+      <div class="doc-icon">01</div>
+      <div class="doc-info">
+        <div class="title">Свидетельство о государственной регистрации (ОГРН)</div>
+        <div class="meta">ОГРН 1147746014880 · выдано 14.08.1994</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-01-ogrn.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-01-ogrn.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+    <div class="doc-item" onclick="openDoc('doc-02-inn.pdf', 'Свидетельство ИНН')">
+      <div class="doc-icon">02</div>
+      <div class="doc-info">
+        <div class="title">Свидетельство о постановке на учёт в налоговом органе (ИНН)</div>
+        <div class="meta">ИНН 7714880148 · выдано 14.08.1994</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-02-inn.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-02-inn.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+    <div class="doc-item" onclick="openDoc('doc-03-ustav.pdf', 'Устав корпорации')">
+      <div class="doc-icon">03</div>
+      <div class="doc-info">
+        <div class="title">Устав ООО «Корпорация „Горизонт"»</div>
+        <div class="meta">Утверждён общим собранием участников 14.08.1994</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-03-ustav.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-03-ustav.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+    <div class="doc-item" onclick="openDoc('doc-04-license-mvt.pdf', 'Лицензия Минпромторга')">
+      <div class="doc-icon">04</div>
+      <div class="doc-info">
+        <div class="title">Лицензия на разработку, производство, испытание и ремонт вооружения и военной техники</div>
+        <div class="meta">№ ВВТ-1488-2023 · выдана 15.03.2023</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-04-license-mvt.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-04-license-mvt.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+    <div class="doc-item" onclick="openDoc('doc-05-license-med.pdf', 'Лицензия Росздравнадзора')">
+      <div class="doc-icon">05</div>
+      <div class="doc-info">
+        <div class="title">Лицензия на осуществление медицинской деятельности</div>
+        <div class="meta">№ ЛО-77-01-148814 · выдана 22.06.2022</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-05-license-med.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-05-license-med.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+    <div class="doc-item" onclick="openDoc('doc-06-license-security.pdf', 'Лицензия Росгвардии')">
+      <div class="doc-icon">06</div>
+      <div class="doc-info">
+        <div class="title">Лицензия на осуществление частной охранной деятельности</div>
+        <div class="meta">№ ЧО-77-1488-2023 · выдана 10.02.2023</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-06-license-security.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-06-license-security.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+    <div class="doc-item" onclick="openDoc('doc-07-license-fstek.pdf', 'Лицензия ФСТЭК')">
+      <div class="doc-icon">07</div>
+      <div class="doc-info">
+        <div class="title">Лицензия ФСТЭК на разработку и производство ПО</div>
+        <div class="meta">№ ФСТЭК-1488-2024 · выдана 05.09.2024</div>
+      </div>
+      <div class="doc-actions">
+        <a href="doc-07-license-fstek.pdf" target="_blank" onclick="event.stopPropagation()">Открыть</a>
+        <a href="doc-07-license-fstek.pdf" download onclick="event.stopPropagation()">Скачать</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="modal" id="pdfModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Документ</div>
+      <button class="modal-close" onclick="closeDoc()">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe id="pdfFrame" src=""></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: этот сайт — художественный вымысел в рамках продвижения игры Baikal Scientific Research Institute в Роблоксе.</div>
+  <div><a href="index.html">← На главную</a></div>
+</footer>
+
+<script>
+  function openDoc(file, title) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('pdfFrame').src = file;
+    document.getElementById('pdfModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDoc() {
+    document.getElementById('pdfModal').classList.remove('active');
+    document.getElementById('pdfFrame').src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Закрытие по Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDoc();
+  });
+
+  // Закрытие по клику на фон
+  document.getElementById('pdfModal').addEventListener('click', (e) => {
+    if (e.target.id === 'pdfModal') closeDoc();
+  });
+
+  // Плавный переход по ссылкам
+  document.querySelectorAll('a[href$=".html"], a[href*=".html?"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http')) return;
+      e.preventDefault();
+      document.body.style.transition = 'opacity 0.4s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = href; }, 400);
+    });
+  });
+</script>
+
+</body>
+</html>
